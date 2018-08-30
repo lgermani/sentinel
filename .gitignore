@@ -1,4 +1,48 @@
 target/
+
+.gauge
+logs
+reports
+gauge_bin
+target
+
+# ide generated targets
+target-eclipse
+*.class
+*.log
+CloudpassKeystore
+
+*.vpp.bak*
+*.vux
+# eclipse conf file
+.metadata
+.settings
+.classpath
+.project
+.manager
+.scala_dependencies
+.cache
+web/.metadata
+web/Servers
+
+# idea conf files
+.idea
+.idea/
+*.iml
+*.ipr
+*.iws
+out
+
+# antlr token files
+*.tokens
+
+# OS generated files
+.DS_Store
+*.swp
+
+# local property files
+*.local
+
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
