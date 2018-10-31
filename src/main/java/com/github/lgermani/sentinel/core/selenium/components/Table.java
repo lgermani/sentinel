@@ -23,18 +23,28 @@ public interface Table extends Element {
     int getColumnCount();
 
     /**
-     * Gets the WebElement of the cell at the specified LOGICAL index
+     * Gets the Element of the cell at the specified LOGICAL index
      * @param rowIdx The logical index of the row. Starts at 1.
      * @param colIdx The logical index of the column. Starts at 1.
      * @return the WebElement of the cell at the specified index
      */
-    WebElement getCellAtIndex(int rowIdx, int colIdx);
+    Element getCellAtIndex(int rowIdx, int colIdx);
 
     /**
-     * Gets the WebElement of the cell at the specified ABSOLUTE index
+     * Gets the Element of the cell at the specified ABSOLUTE index
      * @param rowIdx The zero based index of the row
      * @param colIdx The zero based index of the column
      * @return the WebElement of the cell at the specified index
      */
-    WebElement getCellAtAbsoluteIndex(int rowIdx, int colIdx);
+    Element getCellAtAbsoluteIndex(int rowIdx, int colIdx);
+
+
+    /**
+     * Gets the Row matching columnContentLocator and columnIndex
+     * Used to search in a table using one of the column to get Row Element
+     * @param columnIndex The index of search column (td) starts at 1
+     * @param columnContentLocator Sub search Xpath used to find tow (td)
+     * @return the Row
+     */
+    Element findTableRow(int columnIndex, String columnContentLocator);
 }

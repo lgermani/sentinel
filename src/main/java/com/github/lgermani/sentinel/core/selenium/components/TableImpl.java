@@ -1,5 +1,6 @@
 package com.github.lgermani.sentinel.core.selenium.components;
 
+import com.github.lgermani.sentinel.core.selenium.base.Element;
 import com.github.lgermani.sentinel.core.selenium.base.ElementImpl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -37,12 +38,12 @@ public class TableImpl extends ElementImpl implements Table {
 	}
 
 	@Override
-	public WebElement getCellAtIndex(int rowIdx, int colIdx) {
+	public Element getCellAtIndex(int rowIdx, int colIdx) {
 		return getCellAtAbsoluteIndex(rowIdx-1, colIdx-1);
 	}
 
 	@Override
-	public WebElement getCellAtAbsoluteIndex(int rowIdx, int colIdx) {
+	public Element getCellAtAbsoluteIndex(int rowIdx, int colIdx) {
 		// Get the row at the specified index
 		WebElement row = getRows().get(rowIdx);
 
@@ -50,11 +51,11 @@ public class TableImpl extends ElementImpl implements Table {
 
 		// Cells are most likely to be td tags
 		if ((cells = row.findElements(By.tagName("td"))).size() > 0) {
-			return cells.get(colIdx);
+			return new ElementImpl(cells.get(colIdx));
 		}
 		// Failing that try th tags
 		else if ((cells = row.findElements(By.tagName("th"))).size() > 0) {
-			return cells.get(colIdx);
+			return new ElementImpl(cells.get(colIdx));
 		} else {
 			final String error = String
 					.format("Could not find cell at row: %s column: %s",
@@ -81,6 +82,13 @@ public class TableImpl extends ElementImpl implements Table {
 		rows.addAll(findElements(By.cssSelector("tfoot tr")));
 
 		return rows;
+	}
+
+	@Override
+	public Element findTableRow(int columnIndex, String columnContentLocator){
+		String findColumnXPATH = "//td[" + Integer.toString(columnIndex) + "]" + columnContentLocator + "//ancestor::tr";
+		WebElement row = this.findElement(By.xpath(findColumnXPATH));
+		return new ElementImpl(row);
 	}
 
 }
