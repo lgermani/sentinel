@@ -19,29 +19,37 @@ public class WebDriverManager {
 
     @BeforeSpec
     public void specSetup(){
-        if(isSpecRenew()){
-            initializeDriver();
+        if(loadBrowser()){
+            if(isSpecRenew()){
+                initializeDriver();
+            }
         }
     }
 
     @AfterSpec
     public void specTearDown(){
-        if(isSpecRenew()){
-            closeDriver();
+        if(loadBrowser()){
+            if(isSpecRenew()){
+                closeDriver();
+            }
         }
     }
 
     @BeforeScenario
     public void scenarioSetup(){
-        if(isScenarioRenew()){
-            initializeDriver();
+        if(loadBrowser()) {
+            if (isScenarioRenew()) {
+                initializeDriver();
+            }
         }
     }
 
     @AfterScenario
     public void scenarioTearDown(){
-        if(isScenarioRenew()){
-            closeDriver();
+        if(loadBrowser()) {
+            if (isScenarioRenew()) {
+                closeDriver();
+            }
         }
     }
 
@@ -103,6 +111,10 @@ public class WebDriverManager {
 
     public static boolean isDevelopmentEnvironment(){
         return SeleniumParams.getInstance().isDevelopmentEnvironment();
+    }
+
+    public static boolean loadBrowser(){
+        return SeleniumParams.getInstance().loadBrowser();
     }
 
 }
