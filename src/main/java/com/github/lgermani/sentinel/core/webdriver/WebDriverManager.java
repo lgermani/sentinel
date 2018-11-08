@@ -19,7 +19,6 @@ public class WebDriverManager {
 
     @BeforeSpec
     public void specSetup(){
-        System.out.println("DEBUG VERISON 0.1");
         if(isSpecRenew()){
             initializeDriver();
         }
