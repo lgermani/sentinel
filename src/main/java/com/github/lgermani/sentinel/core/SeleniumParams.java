@@ -16,7 +16,6 @@ public class SeleniumParams {
     private boolean useVerboseLogging;
     private BrowserSessionsEnum browserSessions;
     private boolean developmentEnvironment;
-    private boolean loadBrowser;
 
     //Grid info
     private boolean executeOnGrid;
@@ -28,12 +27,6 @@ public class SeleniumParams {
 
     //Singleton implementation
     public SeleniumParams() {
-        if (StringUtils.isNotBlank(System.getenv("loadBrowser"))) {
-            loadBrowser = Boolean.parseBoolean(System.getenv("loadBrowser"));
-        }else{
-            loadBrowser = true;
-        }
-        
         if (StringUtils.isNotBlank(System.getenv("default_wait_for_timeouts"))) {
             defaultWaitForTimeouts = Long.parseLong(System.getenv("default_wait_for_timeouts"));
         } else {
@@ -134,9 +127,5 @@ public class SeleniumParams {
 
     public String getPlatform() {
         return platform;
-    }
-
-    public boolean loadBrowser() {
-        return loadBrowser;
     }
 }

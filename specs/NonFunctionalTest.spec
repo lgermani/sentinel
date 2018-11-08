@@ -1,15 +1,12 @@
 Specification Heading
 =====================
-Created by lgermani on 30/08/2018
+Created by Lucas Germani on 08/11/2018
 
-Tags: selenium
+tags: integration
 
 This is an executable specification file which follows markdown syntax.
 Every heading in this file denotes a scenario. Every bulleted point denotes a step.
      
-Example
+Scenario Heading
 ----------------
-* Given I'm acessing google homepage
-* When I search for "Selenium"
-* Then should led me to result page
-* Then "https://www.seleniumhq.org/" should be among the results
+* Integration Step

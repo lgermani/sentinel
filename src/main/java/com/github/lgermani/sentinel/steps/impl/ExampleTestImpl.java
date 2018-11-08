@@ -45,4 +45,8 @@ public class ExampleTestImpl extends AbstractStep {
     }
 
 
+    @Step("Integration Step")
+    public void integrationStep() {
+        System.out.println(" ---------> Integration Step <---------");
+    }
 }

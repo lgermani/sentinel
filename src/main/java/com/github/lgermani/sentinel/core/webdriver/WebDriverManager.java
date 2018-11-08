@@ -1,9 +1,6 @@
 package com.github.lgermani.sentinel.core.webdriver;
 
-import com.thoughtworks.gauge.AfterScenario;
-import com.thoughtworks.gauge.AfterSpec;
-import com.thoughtworks.gauge.BeforeScenario;
-import com.thoughtworks.gauge.BeforeSpec;
+import com.thoughtworks.gauge.*;
 import com.github.lgermani.sentinel.core.EnviromentParams;
 import com.github.lgermani.sentinel.core.SeleniumParams;
 import com.github.lgermani.sentinel.core.enumerator.BrowserSessionsEnum;
@@ -17,39 +14,31 @@ import java.util.concurrent.TimeUnit;
  */
 public class WebDriverManager {
 
-    @BeforeSpec
-    public void specSetup(){
-        if(loadBrowser()){
-            if(isSpecRenew()){
-                initializeDriver();
-            }
+    @BeforeSpec(tags = "selenium", tagAggregation = Operator.OR)
+    public void browserSpecSetup(){
+        if(isSpecRenew()){
+            initializeDriver();
         }
     }
 
-    @AfterSpec
+    @AfterSpec(tags = "selenium", tagAggregation = Operator.OR)
     public void specTearDown(){
-        if(loadBrowser()){
-            if(isSpecRenew()){
-                closeDriver();
-            }
+        if(isSpecRenew()){
+            closeDriver();
         }
     }
 
-    @BeforeScenario
+    @BeforeScenario(tags = "selenium", tagAggregation = Operator.OR)
     public void scenarioSetup(){
-        if(loadBrowser()) {
-            if (isScenarioRenew()) {
-                initializeDriver();
-            }
+        if (isScenarioRenew()) {
+            initializeDriver();
         }
     }
 
-    @AfterScenario
+    @AfterScenario(tags = "selenium", tagAggregation = Operator.OR)
     public void scenarioTearDown(){
-        if(loadBrowser()) {
-            if (isScenarioRenew()) {
-                closeDriver();
-            }
+        if (isScenarioRenew()) {
+            closeDriver();
         }
     }
 
@@ -112,9 +101,4 @@ public class WebDriverManager {
     public static boolean isDevelopmentEnvironment(){
         return SeleniumParams.getInstance().isDevelopmentEnvironment();
     }
-
-    public static boolean loadBrowser(){
-        return SeleniumParams.getInstance().loadBrowser();
-    }
-
 }
