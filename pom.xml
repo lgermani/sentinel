@@ -9,7 +9,7 @@
 
     <groupId>com.github.lgermani</groupId>
     <artifactId>sentinel</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <build>
         <plugins>
             <plugin>
