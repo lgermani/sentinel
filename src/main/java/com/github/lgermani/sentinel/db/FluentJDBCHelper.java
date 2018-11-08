@@ -6,6 +6,8 @@ import org.codejargon.fluentjdbc.api.FluentJdbcBuilder;
 import org.codejargon.fluentjdbc.api.mapper.Mappers;
 import org.codejargon.fluentjdbc.api.query.Query;
 
+import javax.sql.DataSource;
+
 
 /**
  * Helper class for use Fluent-jdbc: https://github.com/zsoltherpai/fluent-jdbc
@@ -13,18 +15,21 @@ import org.codejargon.fluentjdbc.api.query.Query;
 public class FluentJDBCHelper {
 
     private FluentJdbc fluentJdbc;
-    public Query query;
 
     public FluentJDBCHelper() {
         fluentJdbc = new FluentJdbcBuilder()
                 .connectionProvider(createDataSource())
                 .build();
+    }
 
-        query = fluentJdbc.query();
+    public FluentJDBCHelper(DataSource dataSource) {
+        fluentJdbc = new FluentJdbcBuilder()
+                .connectionProvider(dataSource)
+                .build();
     }
 
     public Query query(){
-        return query;
+        return fluentJdbc.query();
     }
 
     private MysqlDataSource createDataSource(){
